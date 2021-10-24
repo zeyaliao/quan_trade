@@ -1,0 +1,23 @@
+try:
+    cursor.execute("drop database test")
+except:
+    print('数据库未创建，无法删除')
+cursor.execute("create database test")
+cursor.execute("use test")
+cursor.execute("create table student(id int primary key, name VARCHAR(10) unique, age int)")
+cursor.execute("insert into student(id, name, age) values(1, 'lzy', 24)")
+cursor.execute("insert IGNORE into student(id, name, age) values(1, 'lzy', 24)")
+cursor.execute("insert IGNORE into student(id, name, age) values(1, 'lzy1', 24)")
+cursor.execute("insert IGNORE into student(id, name, age) values(2, 'lzy', 24)")
+cursor.execute("insert IGNORE into student(id, name, age) values(2, 'a', null)")
+#cursor.execute("replace into student(名字, 年龄) values('廖泽亚', 24)")
+cursor.execute("select * from student")
+results = cursor.fetchall()
+for row in results:
+    print(row)
+cursor.close()
+db.commit()
+db.close()
+print('关闭数据库')
+sys.exit(0);
+print('exit')
